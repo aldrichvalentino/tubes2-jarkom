@@ -54,6 +54,30 @@ for i in range(0, len(arrayOfScenarios)):
     # update the destination routing table with the source routing table
     sourceRoutingTable = listOfRoutingTables[source]
     destinationRoutingTable = listOfRoutingTables[destination]
-    print sourceRoutingTable
-    print destinationRoutingTable
-    #TODO: update the routing table of destination node
+    # print sourceRoutingTable
+    # print destinationRoutingTable
+
+    # Update the routing table of destination node
+    for j in range(0, len(destinationRoutingTable)):
+        if(destinationRoutingTable[j][0] == -1):  # information unknown
+            # print 'harus diupdate nih'
+            # check if the source routing table has the info about the unknown node
+            if(sourceRoutingTable[j][0] != -1):
+                # info is known, then the next hop is assigned to the source node
+                # the distance is updated
+                destinationRoutingTable[j] = [1 + sourceRoutingTable[j][0], source]
+    
+    # print 'udah diupdate'
+    # print destinationRoutingTable
+    # dump the routing table back into the list
+    listOfRoutingTables[destination] = destinationRoutingTable
+
+# print ' '
+for i in range(0, len(listOfRoutingTables)):
+    for j in range(0, len(listOfRoutingTables[i])):
+        # output format: distance _ next hop node
+        distance = listOfRoutingTables[i][j][0]
+        nextHop = listOfRoutingTables[i][j][1]
+        if(nextHop != -1):
+            nextHop += 1
+        print str(distance) + ' ' + str(nextHop)
