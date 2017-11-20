@@ -66,6 +66,11 @@ for i in range(0, len(arrayOfScenarios)):
                 # info is known, then the next hop is assigned to the source node
                 # the distance is updated
                 destinationRoutingTable[j] = [1 + sourceRoutingTable[j][0], source]
+        elif(destinationRoutingTable[j][0] > sourceRoutingTable[j][0] and  # distance is shorter
+            sourceRoutingTable[j][0] != -1 and  # the source has the information about the shorter path
+            destinationRoutingTable[j][1] != source):  # the destination routing table is different from the source path
+            # if the distance of the source routing table is shorter, then update
+            destinationRoutingTable[j] = [1 + sourceRoutingTable[j][0], source]
     
     # print 'udah diupdate'
     # print destinationRoutingTable
