@@ -1,13 +1,28 @@
 # get user input for node topology
-numberOfNodes = eval(raw_input())
+nodesAndEdge = raw_input()
+userInput = nodesAndEdge.split(' ')
+numberOfNodes = eval(userInput[0])
+numberOfEdge = eval(userInput[1])
+
+# initiate array of nodes
 arrayOfNodes = []
 for i in range(0, numberOfNodes):
+    arrayOfNodes.append([])
+
+# fill the edge
+for i in range(0, numberOfEdge):
     stringInput = raw_input()
-    result = stringInput.split(',')
-    neighbourNodes = []
-    for j in range(0, len(result)):
-        neighbourNodes.append(eval(result[j]) - 1)  # begin with 0
-    arrayOfNodes.append(neighbourNodes)
+    result = stringInput.split(' ')
+    sourceEdge = eval(result[0]) - 1 
+    destinationEdge = eval(result[1]) - 1
+    neighbourNodes = arrayOfNodes[sourceEdge]
+    # insert the new neighbour
+    neighbourNodes.append(destinationEdge)
+    arrayOfNodes[sourceEdge] = neighbourNodes
+    # vice versa
+    neighbourNodes = arrayOfNodes[destinationEdge]
+    neighbourNodes.append(sourceEdge)
+    arrayOfNodes[destinationEdge] = neighbourNodes
 
 # get user input for scenario
 numberOfScenarios = eval(raw_input())
