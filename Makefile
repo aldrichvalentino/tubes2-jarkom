@@ -1,8 +1,8 @@
 all:
-	@g++ -o main src/main.cpp
+	@g++ -o main.exe src/main.cpp
 
 run:
-	@./main
+	@./main.exe
 
 test:
-	@./main < data/test.txt
+	@./main.exe < data/test.txt
