@@ -1,4 +1,8 @@
-default:
-	
+all:
+	@g++ -o main src/main.cpp
+
 run:
-	@python src/main.py
+	@./main
+
+test:
+	@./main < data/test.txt
