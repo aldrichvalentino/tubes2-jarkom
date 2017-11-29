@@ -8,6 +8,7 @@ int main() {
     int numberOfNodes, numberOfEdges;
     cin >> numberOfNodes >> numberOfEdges;
 
+    //Initialize
     pair<int, int> listOfRoutingTables[numberOfNodes][numberOfNodes];
     for(int i = 0; i < numberOfNodes; i++){
         for(int j = 0; j < numberOfNodes; j++){
@@ -19,6 +20,7 @@ int main() {
         }
     }
 
+    //Connecting
     for (int i = 0;i < numberOfEdges; i++) {
         int source, destination;
         cin >> source >> destination;
@@ -35,21 +37,28 @@ int main() {
     int numberOfScenarios;
     cin >> numberOfScenarios;
 
+
+    //Routing
     for(int i = 0; i < numberOfScenarios; i++){
         int source, dest;
         cin >> source >> dest;
         source -= 1;
         dest -= 1;
         for(int j = 0; j < numberOfNodes; j++){
+            //Jika jarak dest -1 dan jarak source bukan -1
             if(listOfRoutingTables[dest][j].first == -1 && listOfRoutingTables[source][j].first != -1){
                 listOfRoutingTables[dest][j].first = 1 + listOfRoutingTables[source][j].first;
                 listOfRoutingTables[dest][j].second = source;
-            } else if(listOfRoutingTables[dest][j].first > (listOfRoutingTables[source][j].first + 1) &&
+            }
+            //Jika jarak dest > jarak source + 1 dan jarak source <> -1 dan nextHop dest <> source 
+            else if(listOfRoutingTables[dest][j].first > (listOfRoutingTables[source][j].first + 1) &&
                         listOfRoutingTables[source][j].first != -1 &&
                         listOfRoutingTables[dest][j].second != source){
                 listOfRoutingTables[dest][j].first = 1 + listOfRoutingTables[source][j].first;
                 listOfRoutingTables[dest][j].second = source;
-            } else if(listOfRoutingTables[dest][j].first == (listOfRoutingTables[source][j].first + 1) &&
+            } 
+            //Jika jarak dest = jarak source + 1 dan jarak dest <> -1 dan nextHop dest > source
+            else if(listOfRoutingTables[dest][j].first == (listOfRoutingTables[source][j].first + 1) &&
                         listOfRoutingTables[dest][j].first != -1 &&
                         listOfRoutingTables[dest][j].second > source){
                 listOfRoutingTables[dest][j].first = 1 + listOfRoutingTables[source][j].first;
