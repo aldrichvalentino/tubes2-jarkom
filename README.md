@@ -1,5 +1,5 @@
-# tubes2-jarkom
-Tugas Besar Distance Vector Routing
+# Tugas Besar 2 - IF3130 Jaringan Komputer
+Distance Vector Routing
 
 ## Petunjuk Penggunaan Program
 ### Windows
